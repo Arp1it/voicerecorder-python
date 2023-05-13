@@ -58,6 +58,12 @@ def time_left(t):
     t4.start()
 
     while True:
+        """ In the code, t3.join(0) and t4.join(0) is used to check the status of the thread t3 without blocking the main thread. The argument 0 passed to the join method sets a timeout value of zero seconds. This means that the join method will return immediately, whether or not the thread has completed its execution.
+
+        If the thread t3 has completed its execution, t3.join(0) and t4.join(0) will return None. If it is still running, t3.join(0) and t4.join(0) will return without waiting for it to complete.
+
+        In summary, t3.join(0) and t4.join(0) is a non-blocking way to check if the thread t3 has completed its execution, and the 0 argument sets a timeout value of zero seconds to return immediately."""
+
         t3.join(0)
         t4.join(0)
         if flag:
@@ -71,7 +77,7 @@ def time_left(t):
         t4.cancel()
     return 0
 
-a = 1000
+a = int(input("enter time to record: "))
 t2 = threading.Thread(target=time_left, args=(a,))
 t1 = threading.Thread(target=rec, args=(a, t2))
 
